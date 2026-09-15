@@ -16,6 +16,19 @@ El proyecto está 100% dockerizado para asegurar paridad de desarrollo. Para lev
 docker compose up -d --build
 ```
 
+Para detener el sistema se puede usar:
+
+```bash
+docker compose down
+```
+
+Para ver los logs del sistema se puede usar:
+
+```bash
+docker compose logs -f
+```
+
+
 El orquestador levantará:
 - **Backend API**: http://localhost:8000
 - **Frontend App**: http://localhost:5173
