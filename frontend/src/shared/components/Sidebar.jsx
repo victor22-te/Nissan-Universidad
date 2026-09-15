@@ -26,20 +26,20 @@ export default function Sidebar() {
       </div>
       <nav className="sidebar-nav">
         <div className="nav-section-title">Modulos</div>
-        <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} end>
+        <NavLink to="/app" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`} end>
           <LayoutDashboard /> Inicio
         </NavLink>
-        <NavLink to="/repse" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <FileText /> Gestion REPSE
+        <NavLink to="/app/ventanilla-unica" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <FileText /> Ventanilla Única
         </NavLink>
-        <NavLink to="/proyectos" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <LayoutGrid /> Proyectos
+        <NavLink to="/app/status-vehiculo" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <LayoutGrid /> Status Vehículo
         </NavLink>
 
         <div className="nav-section-title">Sistema</div>
-        <NavLink to="/config" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <Settings /> Configuracion
-        </NavLink>
+        <button onClick={() => { localStorage.removeItem('token'); window.location.href = '/login'; }} className="nav-item text-red-500">
+          Cerrar Sesión
+        </button>
 
         <div className="sidebar-footer">
           <button 

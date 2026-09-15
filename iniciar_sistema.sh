@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Iniciar Online Fiscal - REPSE
+# Iniciar NISSAN UNIVERSIDAD - ERP
 # Compatible con Linux, macOS, WSL y Git Bash (Windows)
 # ==============================================================================
 
@@ -12,7 +12,7 @@ RED='\033[0;31m'
 NC='\033[0m' # Sin color
 
 echo -e "${GREEN}==========================================================${NC}"
-echo -e "${GREEN}         Iniciando Online Fiscal - REPSE                  ${NC}"
+echo -e "${GREEN}         Iniciando NISSAN UNIVERSIDAD - ERP                  ${NC}"
 echo -e "${GREEN}==========================================================${NC}"
 
 # Ruta raíz del proyecto

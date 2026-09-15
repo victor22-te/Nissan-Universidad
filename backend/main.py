@@ -4,18 +4,34 @@ Sistema modular de contabilidad y gestión fiscal.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine, Base
-from modules.repse.router import repse_router
-from modules.projects.router import router as projects_router
+from database import engine, Base, SessionLocal
+from modules.auth.router import router as auth_router, get_password_hash
+from models import Usuario
 
 # Crear todas las tablas
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Online Fiscal - REPSE",
-    description="Sistema de gestión REPSE con reportes automáticos ICSOE y SISUB",
+    title="Nissan ERP",
+    description="Sistema de gestión Nissan Universidad",
     version="1.0.0",
 )
+
+@app.on_event("startup")
+def create_initial_data():
+    db = SessionLocal()
+    try:
+        user = db.query(Usuario).filter(Usuario.email == "victor22skate@gmail.com").first()
+        if not user:
+            new_user = Usuario(
+                email="victor22skate@gmail.com",
+                password_hash=get_password_hash("Kenny_002"),
+                is_root=True
+            )
+            db.add(new_user)
+            db.commit()
+    finally:
+        db.close()
 
 # CORS para permitir peticiones desde el frontend React
 app.add_middleware(
@@ -27,15 +43,14 @@ app.add_middleware(
 )
 
 # Registrar routers de módulos de negocio
-app.include_router(repse_router)
-app.include_router(projects_router)
+app.include_router(auth_router)
 
 
 @app.get("/")
 def root():
     return {
-        "app": "Online Fiscal",
-        "modulos": ["REPSE", "Projects"],
+        "app": "Nissan ERP",
+        "modulos": ["Auth"],
         "version": "1.0.0",
         "status": "running",
     }
