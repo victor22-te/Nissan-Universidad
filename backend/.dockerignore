@@ -1,10 +1,5 @@
+.venv/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.venv/
-venv/
+nissan_erp.db
 .env
-.git/
-.gitignore
-tests/
