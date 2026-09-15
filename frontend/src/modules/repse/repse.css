@@ -1,0 +1,195 @@
+/* ── REPSE Domain Styles (Tabs, Cards, Reports, Associations) ── */
+
+/* ── InicioTab ────────────────────────────────────────── */
+.repse-create-card {
+  margin-bottom: 24px;
+}
+
+.cuat-card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.repse-active-working-card {
+  margin-top: 32px;
+}
+
+.repse-working-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.repse-summary-card {
+  background: var(--bg-card-hover);
+  border-color: transparent;
+}
+
+.repse-summary-card h4 {
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.repse-summary-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.repse-summary-icon {
+  margin-bottom: 8px;
+}
+
+.repse-summary-icon.accent {
+  color: var(--accent);
+}
+
+.repse-summary-icon.success {
+  color: var(--success);
+}
+
+.repse-summary-icon.warning {
+  color: var(--warning);
+}
+
+/* ── Tablas y Celdas de Catálogos (Objetos, Beneficiarios, Empleados) ── */
+.cell-primary-text {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.cell-monospace-sm {
+  font-size: 11px;
+}
+
+.table-actions-group {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-icon-primary {
+  color: var(--accent);
+}
+
+.btn-icon-danger {
+  color: var(--danger);
+}
+
+.btn-icon-info {
+  color: var(--info);
+}
+
+.btn-icon-success {
+  color: var(--success);
+}
+
+.btn-icon-warning {
+  color: var(--warning);
+}
+
+/* ── EmpleadosTab ─────────────────────────────────────── */
+.empleados-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.file-upload-desc-sm {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.file-upload-card {
+  margin-bottom: 24px;
+}
+
+/* ── AsociarTab ───────────────────────────────────────── */
+.contract-row-asociar {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.asociar-contract-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asociar-tags-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.asociar-empty-tag {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── ReportesTab ──────────────────────────────────────── */
+.report-card-center {
+  text-align: center;
+}
+
+.report-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.report-icon-box.success {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.report-icon-box.info {
+  background: var(--bg-card-hover);
+  color: var(--info);
+}
+
+.report-icon-box.warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.report-card-title {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.report-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* ── Modales de Asociación ────────────────────────────── */
+.modal-item-row {
+  cursor: pointer;
+}
+
+.modal-item-row-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-mode-switch-group {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.modal-empty-msg {
+  color: var(--text-muted);
+}
+
+.modal-subtitle-muted {
+  font-size: 12px;
+  color: var(--text-muted);
+}

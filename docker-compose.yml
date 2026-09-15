@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: online_fiscal_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persistencia de la base de datos SQLite en el host
+      - ./backend/online_fiscal.db:/app/online_fiscal.db
+    environment:
+      - ENVIRONMENT=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: online_fiscal_frontend
+    restart: unless-stopped
+    ports:
+      # Mapeo al puerto 5173 para mantener la misma URL local familiar (http://localhost:5173)
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy

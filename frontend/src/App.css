@@ -1,0 +1,35 @@
+/* ── App Home Page & Dashboard Styles ─────────────────── */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: 640px;
+}
+
+.home-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-card-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.home-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.home-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.config-empty-state {
+  margin-top: 80px;
+}

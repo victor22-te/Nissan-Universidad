@@ -1,0 +1,20 @@
+/* ── REPSE Module Main Layout Styles ──────────────────── */
+.repse-active-period-badge {
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.repse-active-period-badge strong {
+  color: var(--text-primary);
+}
+
+.repse-content-area {
+  margin-top: 24px;
+}
