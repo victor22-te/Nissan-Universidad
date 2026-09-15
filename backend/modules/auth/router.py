@@ -2,16 +2,22 @@ from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+from fastapi.concurrency import run_in_threadpool
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 import bcrypt
+import os
 from jose import JWTError, jwt
 from database import get_db
 from models import Usuario
 from .schemas import Token, UserLogin, UserResponse
+from dotenv import load_dotenv
 
-SECRET_KEY = "nissan_super_secret_key_change_in_production"
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback_secret_key_if_missing")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 1 día
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440")) # 1 día por defecto
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")
 
@@ -33,7 +39,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="No se pudo validar las credenciales",
@@ -47,20 +53,33 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     except JWTError:
         raise credentials_exception
         
-    user = db.query(Usuario).filter(Usuario.email == email).first()
+    result = await db.execute(select(Usuario).filter(Usuario.email == email))
+    user = result.scalars().first()
     if user is None:
         raise credentials_exception
     return user
 
 @router.post("/login", response_model=Token)
-def login(user_data: UserLogin, db: Session = Depends(get_db)):
-    user = db.query(Usuario).filter(Usuario.email == user_data.email).first()
-    if not user or not verify_password(user_data.password, user.password_hash):
+async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Usuario).filter(Usuario.email == user_data.email))
+    user = result.scalars().first()
+    
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Email o contraseña incorrectos",
             headers={"WWW-Authenticate": "Bearer"},
         )
+        
+    # Validar password asíncronamente en el threadpool
+    is_valid = await run_in_threadpool(verify_password, user_data.password, user.password_hash)
+    if not is_valid:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Email o contraseña incorrectos",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+        
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
@@ -68,5 +87,5 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
     return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get("/me", response_model=UserResponse)
-def read_users_me(current_user: Usuario = Depends(get_current_user)):
+async def read_users_me(current_user: Usuario = Depends(get_current_user)):
     return current_user

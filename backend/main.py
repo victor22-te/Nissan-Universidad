@@ -7,9 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base, SessionLocal
 from modules.auth.router import router as auth_router, get_password_hash
 from models import Usuario
+import os
+from dotenv import load_dotenv
+from sqlalchemy.future import select
 
-# Crear todas las tablas
-Base.metadata.create_all(bind=engine)
+load_dotenv()
 
 app = FastAPI(
     title="Nissan ERP",
@@ -18,25 +20,34 @@ app = FastAPI(
 )
 
 @app.on_event("startup")
-def create_initial_data():
-    db = SessionLocal()
-    try:
-        user = db.query(Usuario).filter(Usuario.email == "victor22skate@gmail.com").first()
+async def create_initial_data():
+    # Crear todas las tablas
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    # Crear datos iniciales
+    async with SessionLocal() as db:
+        admin_email = os.getenv("ADMIN_EMAIL", "victor22skate@gmail.com")
+        admin_password = os.getenv("ADMIN_PASSWORD", "Kenny_002")
+        
+        result = await db.execute(select(Usuario).filter(Usuario.email == admin_email))
+        user = result.scalars().first()
+        
         if not user:
+            from fastapi.concurrency import run_in_threadpool
+            hashed_pw = await run_in_threadpool(get_password_hash, admin_password)
             new_user = Usuario(
-                email="victor22skate@gmail.com",
-                password_hash=get_password_hash("Kenny_002"),
+                email=admin_email,
+                password_hash=hashed_pw,
                 is_root=True
             )
             db.add(new_user)
-            db.commit()
-    finally:
-        db.close()
+            await db.commit()
 
-# CORS para permitir peticiones desde el frontend React
+# CORS restringido para seguridad
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "*"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
