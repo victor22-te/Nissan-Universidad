@@ -35,6 +35,8 @@ export default function Login() {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       minHeight: '100vh',
+      width: '100%',
+      flex: 1,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',

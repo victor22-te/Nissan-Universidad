@@ -33,3 +33,23 @@
 .config-empty-state {
   margin-top: 80px;
 }
+
+/* ── Glassmorphism Main Content ──────────────── */
+.main-content-glass {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  min-height: calc(100vh - 80px); /* accounting for padding */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: white;
+  transition: var(--transition);
+}
+
+[data-theme='light'] .main-content-glass {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}

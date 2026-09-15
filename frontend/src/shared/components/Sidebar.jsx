@@ -21,7 +21,8 @@ export default function Sidebar() {
     <aside className="sidebar">
       <div className="sidebar-header">
         <div className="sidebar-logo">
-          <img src="/logo.png" alt="Online Fiscal" />
+          <img src="/nissan-logo.svg" alt="Nissan Logo" />
+          <h1>Nissan Universidad</h1>
         </div>
       </div>
       <nav className="sidebar-nav">

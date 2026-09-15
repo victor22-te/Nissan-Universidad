@@ -6,6 +6,7 @@ import Sidebar from './shared/components/Sidebar';
 import { ToastProvider } from './shared/context/ToastContext';
 import './index.css';
 import './App.css';
+import nissanPhoto from './assets/nissan_photo.jpg';
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem('token');
@@ -13,10 +14,18 @@ const ProtectedRoute = () => {
     return <Navigate to="/login" replace />;
   }
   return (
-    <div className="app-layout">
+    <div className="app-layout" style={{
+      backgroundImage: `url(${nissanPhoto})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+    }}>
       <Sidebar />
       <main className="main-content">
-        <Outlet />
+        <div className="main-content-glass">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

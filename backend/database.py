@@ -9,8 +9,8 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Para producción, cambiar a PostgreSQL:
-# DATABASE_URL = "postgresql://user:password@host:5432/online_fiscal"
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./online_fiscal.db")
+# DATABASE_URL = "postgresql://user:password@host:5432/nissan_erp"
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./nissan_erp.db")
 
 engine = create_engine(
     DATABASE_URL,
