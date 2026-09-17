@@ -38,4 +38,4 @@ Los contenedores cuentan con volúmenes montados, por lo que cualquier cambio en
 ## Credenciales Base
 En el arranque, el sistema crea un usuario root por defecto:
 - **Correo**: victor22skate@gmail.com
-- **Contraseña**: Kenny_002
+- **Contraseña**: Kenny_002 
