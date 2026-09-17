@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './VentanillaUnica.css';
 export default function VentanillaUnicaPage() {
   return (
     <div style={{ padding: '2rem' }}>

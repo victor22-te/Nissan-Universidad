@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './StatusVehiculo.css';
 export default function StatusVehiculoPage() {
   return (
     <div style={{ padding: '2rem' }}>

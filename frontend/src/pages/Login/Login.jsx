@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import nissanPhoto from '../assets/nissan_photo.jpg';
+import nissanPhoto from '../../assets/nissan_photo.jpg';
 import styles from './Login.module.css';
 
 export default function Login() {

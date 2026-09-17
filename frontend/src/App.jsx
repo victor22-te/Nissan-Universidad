@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import Login from './pages/Login';
-import VentanillaUnicaPage from './pages/VentanillaUnicaPage';
-import StatusVehiculoPage from './pages/StatusVehiculoPage';
-import Sidebar from './shared/components/Sidebar';
+import Login from './pages/Login/Login';
+import VentanillaUnicaPage from './pages/VentanillaUnica/VentanillaUnicaPage';
+import StatusVehiculoPage from './pages/StatusVehiculo/StatusVehiculoPage';
+import Sidebar from './shared/components/Sidebar/Sidebar';
 import { ToastProvider } from './shared/context/ToastContext';
 import './index.css';
 import './App.css';
