@@ -1,6 +1,6 @@
 """
-Online Fiscal - Backend Principal
-Sistema modular de contabilidad y gestión fiscal.
+Nissan ERP - Backend Principal
+Sistema modular de Nissan Universidad.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
