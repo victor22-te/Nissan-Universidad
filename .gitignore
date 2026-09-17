@@ -1,6 +1,35 @@
+# Node
 node_modules/
+dist/
+build/
+.npm
+.eslintcache
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
 venv/
 env/
 .env
 backend/.env
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Database
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
